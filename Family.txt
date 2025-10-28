@@ -7,9 +7,11 @@ parent(mike, tom).
 % Rules
 grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
 sibling(X, Y) :- parent(Z, X), parent(Z, Y), X \= Y.
+cousin(X, Y) :- parent(A, X), parent(B, Y), sibling(A, B), X \= Y.
 
 % Sample Queries:
 % ?- grandparent(john, susan).
 % true.
 % ?- sibling(mary, mike).
 % true.
+
