@@ -1,10 +1,8 @@
 graph = {
-    'A': [('B',3), ('C',5), ('D',3)],
-    'B': [('W',5), ('X',6)],
-    'C': [('E',8), ('F',7)],
-    'D': [('X',5), ('Z',6)],
-    'E': [('G',9)],
-    'F': [], 'W': [], 'X': [], 'Z': [], 'G': []
+    'A': [('B', 3), ('C', 5)],
+    'B': [],
+    'C': [('D', 8)],
+    'D': []
 }
 
 def hill_climb(start, goal):
@@ -12,10 +10,11 @@ def hill_climb(start, goal):
     path = [current]
     while current != goal:
         neighbors = graph[current]
-        if not neighbors: break
+        if not neighbors:
+            break
         next_node = max(neighbors, key=lambda x: x[1])[0]
         path.append(next_node)
         current = next_node
     print("Path:", " → ".join(path))
 
-hill_climb('A', 'G')
+hill_climb('A', 'D')
