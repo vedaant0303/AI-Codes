@@ -21,4 +21,5 @@ PRECON:
 OnTrain(Person) ∧ At(Person, delhi)`
 
 EFFECT:
-OnTrain(Person)`
+~OnTrain(Person)`
+
