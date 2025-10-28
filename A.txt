@@ -1,0 +1,42 @@
+from heapq import heappush, heappop
+
+def astar(graph, heuristics, start, goal):
+    open_list = []
+    heappush(open_list, (heuristics[start], 0, start, [start]))  # (f, g, node, path)
+    closed = set()
+
+    while open_list:
+        f, g, node, path = heappop(open_list)
+
+        if node == goal:
+            print(f"Goal '{goal}' found with cost {g}")
+            print("Path:", " → ".join(path))
+            return path
+
+        if node in closed:
+            continue
+        closed.add(node)
+
+        for neighbor, cost in graph.get(node, []):
+            if neighbor not in closed:
+                g_new = g + cost
+                f_new = g_new + heuristics[neighbor]
+                heappush(open_list, (f_new, g_new, neighbor, path + [neighbor]))
+
+    print("Goal not found")
+    return None
+
+# Example graph
+graph = {
+    'A': [('B', 1), ('C', 3)],
+    'B': [('D', 3), ('E', 1)],
+    'C': [('F', 5)],
+    'E': [('G', 2)],
+    'D': [('G', 5)]
+}
+
+# Heuristic values
+heuristics = {'A':7, 'B':6, 'C':5, 'D':3, 'E':2, 'F':5, 'G':0}
+
+# Run A*
+astar(graph, heuristics, 'A', 'G')

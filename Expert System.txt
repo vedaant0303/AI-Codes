@@ -1,0 +1,35 @@
+knowledge_base = {
+    'rule1': {
+        'condition': lambda person: person['age'] >= 18,
+        'result': 'You are eligible for a loan.'
+    },
+    'rule2': {
+        'condition': lambda person: person['income'] > 30000,
+        'result': 'You are eligible for a loan.'
+    },
+    'rule3': {
+        'condition': lambda person: person['credit_score'] >= 650,
+        'result': 'You have a good credit group.'
+    },
+    'rule4': {
+        'condition': lambda person: person['employment_status'] == 'employed',
+        'result': 'You are employed.'
+    }
+}
+
+def evaluate_rules(person):
+    print("\nLoan Evaluation Results:")
+    for rule_name, rule in knowledge_base.items():
+        if rule['condition'](person):
+            print(f"{rule_name}: {rule['result']}")
+        else:
+            print(f"{rule_name}: Condition not satisfied.")
+
+person = {
+    'age': int(input("Enter your age: ")),
+    'income': float(input("Enter your income: ")),
+    'credit_score': int(input("Enter your credit score: ")),
+    'employment_status': input("Enter your employment status (employed/unemployed): ").lower()
+}
+
+evaluate_rules(person)
